@@ -7,14 +7,17 @@ class Profitwell::Client
     end
 
     def new_customer(email, plan_name, plan_interval, plan_value, start_date, options={})
+      data = {
+          'email' => email,
+          'plan_name' => plan_name,
+          'plan_interval' => plan_interval,
+          'plan_value' => plan_value,
+          'start_date' => start_date
+      }
+      data['currency'] = options['currency'] unless options['currency'].nil?
+      data['end_date'] = options['end_date'] unless options['end_date'].nil?
       customer = connection.post('transactions/') do |req|
-        req.params['email'] = email
-        req.params['plan_name'] = plan_name
-        req.params['plan_interval'] = plan_interval
-        req.params['plan_value'] = plan_value
-        req.params['start_date'] = start_date
-        req.params['currency'] = options['currency'] unless options['currency'].nil?
-        req.params['end_date'] = options['end_date'] unless options['end_date'].nil?
+        req.body = data.to_json
       end
       parse_response(customer)
     end

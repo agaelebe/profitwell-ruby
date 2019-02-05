@@ -7,11 +7,14 @@ class Profitwell::Client
     end
 
     def update_subscription(user_id, plan_name, plan_interval, plan_value, start_date)
+      data = {
+          'plan_name' => plan_name,
+          'plan_interval' => plan_interval,
+          'plan_value' => plan_value,
+          'start_date' => start_date
+      }
       update_response = connection.post("transactions/user/#{user_id}/") do |req|
-        req.params['plan_name'] = plan_name
-        req.params['plan_interval'] = plan_interval
-        req.params['plan_value'] = plan_value
-        req.params['start_date'] = start_date
+        req.body = data.to_json
       end
       parse_response(update_response)
     end
