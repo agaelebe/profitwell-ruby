@@ -36,5 +36,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'faraday', '~> 0.13'
   spec.add_runtime_dependency 'faraday_middleware', '~> 0.10.0'
-  spec.add_runtime_dependency 'json', '~> 1.8', '>= 1.8.3'
+  spec.add_runtime_dependency 'json', '~> 2.3'
 end
